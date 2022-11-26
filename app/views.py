@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
 from app.forms import LivrosForm
 from app.models import Livros
+from django.core.paginator import Paginator
+
 # Create your views here.
 def home(request):
   data = {}
-  data['db'] = Livros.objects.all()
+  #data['db'] = Livros.objects.all()
+  all = Livros.objects.all()
+  paginator = Paginator(all, 2)
+  pages = request.GET.get('page')
+  data['db'] = paginator.get_page(pages)
   return render(request, 'index.html', data)
 
 def form(request):
@@ -37,4 +43,8 @@ def update(request, pk):
     form.save()
     return redirect('home')
 
+def delete(request, pk):
+  db = Livros.objects.get(pk=pk)
+  db.delete()
+  return redirect('home')
   
