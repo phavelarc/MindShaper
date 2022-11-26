@@ -15,62 +15,62 @@
   </head>
   <body>
     {% if request.user.is_authenticated %}
-      <div class="col-8 m-auto pt-md-3 pb-2 text-center">
-        <h1>Crud com Python</h1>
-      </div>
-      <div class="col-8 m-auto pt-2 pb-2 text-center">
-        <a href="/form" class="btn btn-success">Adicionar</a>
-      </div>
-      <div class="col-8 m-auto pt-2 pb-2 text-center">
-        <form method="get">
-          <input type="text" id="search" name="search" class="form-control" placeholder="Buscar..." />
-        </form>
-      </div>
-      <div class="col-8 m-auto pt-4 pb-2 text-center">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Livro</th>
-              <th scope="col">Autor(a)</th>
-              <th scope="col">Editora</th>
-              <th scope="col">Ano</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for dbs in db %}
-            <tr>
-              <th scope="row">{{dbs.id}}</th>
-              <td>{{dbs.livro}}</td>
-              <td>{{dbs.autor}}</td>
-              <td>{{dbs.editora}}</td>
-              <td>{{dbs.ano}}</td>
-              <td>
-                <a href="/view/{{dbs.id}}/" class="btn btn-dark">Visualizar</a>
-                <a href="/edit/{{dbs.id}}/" class="btn btn-primary">Editar</a>
-                <a href="/delete/{{dbs.id}}/" class="btn btn-danger btnDel">Deletar</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <div class="pagination">
-        {% if db.has_previous %}
-          <a href="?page={{db.previous_page_number}}"> < </a>
-        {% endif %} 
-        
-        {{db.number}} 
-        
-        {% if db.has_next %}
-          <a href="?page={{db.next_page_number}}"> > </a>
-        {% endif %}
-      </div>
-      {% load static %}
-      <script src="{% static 'javascript.js' %}"></script>
-    {% else %}
-      Você não tem acesso a essa área!    
-    {% endif %}
+    <div class="col-8 m-auto pt-md-3 pb-2 text-center">
+      <h1>Crud com Python</h1>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+      <a href="/logouts/" class="btn btn-success">Sair</a>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+      <a href="/password/" class="btn btn-success">Trocar Senha</a>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+      <a href="/form" class="btn btn-success">Adicionar</a>
+    </div>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+      <form method="get">
+        <input type="text" id="search" name="search" class="form-control" placeholder="Buscar..." />
+      </form>
+    </div>
+    <div class="col-8 m-auto pt-4 pb-2 text-center">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Livro</th>
+            <th scope="col">Autor(a)</th>
+            <th scope="col">Editora</th>
+            <th scope="col">Ano</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dbs in db %}
+          <tr>
+            <th scope="row">{{dbs.id}}</th>
+            <td>{{dbs.livro}}</td>
+            <td>{{dbs.autor}}</td>
+            <td>{{dbs.editora}}</td>
+            <td>{{dbs.ano}}</td>
+            <td>
+              <a href="/view/{{dbs.id}}/" class="btn btn-dark">Visualizar</a>
+              <a href="/edit/{{dbs.id}}/" class="btn btn-primary">Editar</a>
+              <a href="/delete/{{dbs.id}}/" class="btn btn-danger btnDel">Deletar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      {% if db.has_previous %}
+      <a href="?page={{db.previous_page_number}}"> < </a>
+      {% endif %} {{db.number}} {% if db.has_next %}
+      <a href="?page={{db.next_page_number}}"> > </a>
+      {% endif %}
+    </div>
+    {% load static %}
+    <script src="{% static 'javascript.js' %}"></script>
+    {% else %} Você não tem acesso a essa área! {% endif %}
   </body>
 </html>
