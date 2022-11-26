@@ -6,7 +6,12 @@ from django.core.paginator import Paginator
 # Create your views here.
 def home(request):
   data = {}
-  #data['db'] = Livros.objects.all()
+  search = request.GET.get('search')
+  if search:
+    data['db'] = Livros.objects.filter(livro__icontains=search)
+  else:
+    data['db'] = Livros.objects.all()
+    
   all = Livros.objects.all()
   paginator = Paginator(all, 2)
   pages = request.GET.get('page')
