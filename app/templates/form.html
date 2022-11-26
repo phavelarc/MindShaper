@@ -20,6 +20,7 @@
     <div class="col-8 m-auto pt-2 pb-2 text-center">
       <a href="/" class="btn btn-info">Voltar</a>
     </div>
+    <div id="result" class="col-8 m-auto pt-2 pb-2 text-center"></div>
     <div class="col-24 m-auto pt-4 pb-2 text-center d-flex justify-content-center">
       <form
         name="form"
@@ -53,14 +54,10 @@
           </div>
           <div class="form-group mt-4 d-flex justify-content-center">{{form.ano}}</div>
         </div>
-
-        <!-- <div class="form-group mt-4 d-flex justify-content-center">
-          <span>Autor(a): </span>{{form.autor}}
-        </div> -->
-        <!-- <div class="form-group mt-4 d-flex justify-content-center">Editora: {{form.editora}}</div>
-        <div class="form-group mt-4 d-flex justify-content-center">Ano: {{form.ano}}</div> -->
         <input type="submit" class="btn btn-success" value="Salvar" />
       </form>
     </div>
+    {% load static %}
+    <script src="{% static 'javascript.js' %}"></script>
   </body>
 </html>
