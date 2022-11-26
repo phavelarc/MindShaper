@@ -3,7 +3,7 @@ from app.forms import LivrosForm
 from app.models import Livros
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
@@ -47,11 +47,27 @@ def doLogin(request):
   user = authenticate(username=request.POST['user'], password=request.POST['password'])
   if user is not None:
     login(request, user)
-    return render(request, 'index.html')
+    return redirect('/dashboard/')
   else:
     data['msg'] = 'Usuário ou senha inválidos!'
     data['class'] = 'alert-danger'
     return render(request, 'painel.html', data)
+
+#Logout do sistema
+def logouts(request):
+  logout(request)
+  return redirect('/painel/')
+
+def painelChangePassword(request):
+  return render(request, 'changePassword.html')
+
+#Alterar a senha
+def changePassword(request):
+  user = User.objects.get(email=request.user.email)
+  user.set_password(request.POST['newPassword'])
+  user.save()
+  logouts(request)
+  return redirect('/painel/')
 
 def form(request):
   data = {}
