@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import home, form
+from app.views import home, createUser, store, painel, doLogin, logouts, painelChangePassword, changePassword, form, list, create, view, edit, update, delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('form/', form),
+    path('', home, name='home'),
+    path('createUser/', createUser, name='createUser'),
+    path('store/', store, name='store'),
+    path('painel/', painel, name='painel'),
+    path('login/', doLogin, name='doLogin'),
+    path('logouts/', logouts, name='logouts'),
+    path('password/', painelChangePassword, name='painelChangePassword'),
+    path('changePassword/', changePassword, name='changePassword'),
+    path('form/', form, name='form'),
+    path('dashboard/', list, name='list'),
+    path('create/', create, name='create'),
+    path('view/<int:pk>/', view, name='view'),
+    path('edit/<int:pk>/', edit, name='edit'),
+    path('update/<int:pk>/', update, name='update'),
+    path('delete/<int:pk>/', delete, name='delete'),
 ]
