@@ -24,9 +24,11 @@
     <div class="col-8 m-auto pt-2 pb-2 text-center">
       <a href="/password/" class="btn btn-success">Trocar Senha</a>
     </div>
+    {% if perms.admin.can_add_books %}
     <div class="col-8 m-auto pt-2 pb-2 text-center">
       <a href="/form" class="btn btn-success">Adicionar</a>
     </div>
+    {% endif %}
     <div class="col-8 m-auto pt-2 pb-2 text-center">
       <form method="get">
         <input type="text" id="search" name="search" class="form-control" placeholder="Buscar..." />
@@ -54,8 +56,11 @@
             <td>{{dbs.ano}}</td>
             <td>
               <a href="/view/{{dbs.id}}/" class="btn btn-dark">Visualizar</a>
+              {% if perms.admin.can_edit_books %}
               <a href="/edit/{{dbs.id}}/" class="btn btn-primary">Editar</a>
+              {% endif %} {% if perms.admin.can_delete_books %}
               <a href="/delete/{{dbs.id}}/" class="btn btn-danger btnDel">Deletar</a>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}
