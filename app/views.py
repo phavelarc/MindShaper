@@ -19,12 +19,9 @@ def dashboard(request):
   data = {}
   search = request.GET.get('search')
   livros = []
-  # profile_list = Livros.objects.get_queryset().order_by('id')
   if search:
-    print('1')
     livros = Livros.objects.filter(livro__icontains=search)
   else:
-    print('2')
     livros = Livros.objects.all().order_by('id')
 
   paginator = Paginator(livros, 10)
@@ -114,7 +111,6 @@ def edit(request, pk):
   if not user.has_perm('app.can_edit_books'):
     return redirect('/dashboard/')
 
-  print('aqui')
   return render(request, 'form.html', data)
 
 def update(request, pk):
@@ -122,7 +118,6 @@ def update(request, pk):
   data['db'] = Livros.objects.get(pk=pk)
   form = LivrosForm(request.POST or None, instance=data['db'])
   if form.is_valid():
-    print('aqui2')
     form.save()
     return redirect('/dashboard/')
 
@@ -144,7 +139,6 @@ def exportData(request):
   cursor.execute("SELECT * FROM app_livros ORDER BY id")
   dbConnect.close()
   linhas = json.dumps(cursor.fetchall())
-  print(linhas)
   response = HttpResponse(linhas)
   response['Content-Disposition'] = 'attachment; filename=livros.json'
 
@@ -155,7 +149,6 @@ def importData(request):
   files = json.loads(request.FILES['file'].read())
   dbConnect = connection()
   cursor = dbConnect.cursor(MySQLdb.cursors.DictCursor)
-  print(files)
   for file in files:
     cursor.execute(f""" INSERT INTO app_livros(livro, autor, editora, ano) VALUES('{file["livro"]}', '{file["editora"]}', '{file["autor"]}', '{file["ano"]}')""")
   dbConnect.close()
