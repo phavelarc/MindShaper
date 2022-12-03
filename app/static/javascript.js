@@ -33,6 +33,7 @@
           result.innerHTML = 'Operação realizada com sucesso!'
           result.classList.add('alert');
           result.classList.add('alert-success');
+          window.location = "/dashboard";
         }
       }
       ajax.send(data);
