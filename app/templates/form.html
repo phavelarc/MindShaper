@@ -25,36 +25,56 @@
       <form
         name="form"
         id="form"
-        action="{% if db %}/update/{{db.id}}/{% else %}/create/{% endif %}"
+        action="{% if db %}{% if perms.app.can_edit_books %}/update/{{db.id}}/{% endif %}{% else %}/create/{% endif %}"
         method="post"
         class="col-md-offset-4"
       >
         {% csrf_token %}
-        <div class="col-24 mt-4 d-flex justify-content-between">
-          <div class="form-group mt-4 d-flex justify-content-center">
-            <label>Livro: </label>
-          </div>
-          <div class="form-group mt-4 d-flex justify-content-center">{{form.livro}}</div>
+        <div class="form-group">
+          <label for="livro">Livro</label>
+          <input
+            type="text"
+            class="form-control"
+            name="livro"
+            id="livro"
+            placeholder="Enter Book"
+            value="{{db.livro}}"
+          />
         </div>
-        <div class="col-24 mt-4 d-flex justify-content-between">
-          <div class="form-group mt-4 d-flex justify-content-center">
-            <label>Autor(a): </label>
-          </div>
-          <div class="form-group mt-4 d-flex justify-content-center">{{form.autor}}</div>
+        <div class="form-group">
+          <label for="autor">Autor</label>
+          <input
+            type="text"
+            class="form-control"
+            name="autor"
+            id="writter"
+            placeholder="Enter Writter"
+            value="{{db.autor}}"
+          />
         </div>
-        <div class="col-24 mt-4 d-flex justify-content-between">
-          <div class="form-group mt-4 d-flex justify-content-center">
-            <label>Editora: </label>
-          </div>
-          <div class="form-group mt-4 d-flex justify-content-center">{{form.editora}}</div>
+        <div class="form-group">
+          <label for="editora">Editora</label>
+          <input
+            type="text"
+            class="form-control"
+            name="editora"
+            id="publisher"
+            placeholder="Enter Publisher"
+            value="{{db.editora}}"
+          />
         </div>
-        <div class="col-24 mt-4 d-flex justify-content-between">
-          <div class="form-group mt-4 d-flex justify-content-center">
-            <label>Ano: </label>
-          </div>
-          <div class="form-group mt-4 d-flex justify-content-center">{{form.ano}}</div>
+        <div class="form-group">
+          <label for="ano">Ano</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ano"
+            id="year"
+            placeholder="Enter Year"
+            value="{{db.ano}}"
+          />
         </div>
-        <input type="submit" class="btn btn-success" value="Salvar" />
+        <input type="submit" class="btn btn-success mt-2" value="Salvar" />
       </form>
     </div>
     {% load static %}
