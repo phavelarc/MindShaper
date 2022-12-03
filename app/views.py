@@ -145,10 +145,10 @@ def exportData(request):
   dbConnect.close()
   linhas = json.dumps(cursor.fetchall())
   print(linhas)
-  res = HttpResponse(linhas)
-  res['Content-Disposition'] = 'attachment; filename=livros.json'
+  response = HttpResponse(linhas)
+  response['Content-Disposition'] = 'attachment; filename=livros.json'
 
-  return res
+  return response
 
 #Importar dados
 def importData(request):
@@ -161,3 +161,6 @@ def importData(request):
   dbConnect.close()
 
   return redirect('dashboard')
+
+def about(request):
+  return render(request, 'about.html')
