@@ -87,7 +87,7 @@ def form(request):
 #Criar um novo livro
 def create(request):
   user = User.objects.get(id=request.user.id)
-  if not user.has_perm('can_add_books'):
+  if not user.has_perm('app.can_add_books'):
     return redirect('/dashboard/')
 
   form = LivrosForm(request.POST or None)
@@ -149,8 +149,9 @@ def importData(request):
   files = json.loads(request.FILES['file'].read())
   dbConnect = connection()
   cursor = dbConnect.cursor(MySQLdb.cursors.DictCursor)
+  print(files)
   for file in files:
-    cursor.execute(f""" INSERT INTO app_livros(livro, autor, editora, ano) VALUES('{file["livro"]}', '{file["editora"]}', '{file["autor"]}', '{file["ano"]}')""")
+    cursor.execute(f""" INSERT INTO app_livros(livro, editora, autor, ano) VALUES("{file["title"]}", "{file["publisher"]}", "{file["author"]}", "{file["year"]}")""")
   dbConnect.close()
 
   return redirect('dashboard')
